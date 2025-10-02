@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Finals Random Loadout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #ff2e2e;
+            --dark-red: #c41e1e;
+            --light-red: #ff6b6b;
+            --black: #0a0a0f;
+            --dark-gray: #1a1a25;
+            --light-gray: #3a3a4a;
+            --white: #f0f0f5;
+            --gold: #ffd700;
+            --silver: #e0e0e0;
+            --bronze: #cd7f32;
+            --accent-orange: #ff922b;
+            --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oxanium', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 46, 46, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 146, 43, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                linear-gradient(135deg, var(--black) 0%, #151520 100%);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary-red), var(--accent-orange), var(--gold), var(--primary-red));
+            animation: rotate 10s linear infinite;
+            filter: blur(15px);
+            opacity: 0.7;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--black) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(255, 46, 46, 0.5);
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            z-index: 1;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            color: var(--white);
+            font-size: 3.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, var(--gold), var(--primary-red), var(--accent-orange), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(to right, var(--gold), var(--primary-red), var(--accent-orange), var(--gold));
+            border-radius: 2px;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .subtitle {
+            color: var(--light-gray);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            background: rgba(26, 26, 37, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--gold), var(--primary-red), var(--accent-orange), var(--gold));
+            box-shadow: var(--neon-glow);
+        }
+        
+        .participants-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(10, 10, 15, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .participants-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .participants-section:hover::before {
+            left: 100%;
+        }
+        
+        .participants-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .maps-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(10, 10, 15, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .maps-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .maps-section:hover::before {
+            left: 100%;
+        }
+        
+        .maps-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 46, 46, 0.3);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .section-subtitle {
+            color: var(--light-gray);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        .participants-control {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .participants-input-container {
+            position: relative;
+        }
+        
+        .participants-input {
+            background-color: rgba(26, 26, 37, 0.8);
+            border: 2px solid var(--light-gray);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 10px;
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .participants-input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 
+                inset 0 2px 5px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(255, 46, 46, 0.5);
+        }
+        
+        .participants-slider-container {
+            flex-grow: 1;
+            position: relative;
+        }
+        
+        .participants-slider {
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--accent-orange), var(--primary-red), var(--gold));
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .participants-slider:hover {
+            box-shadow: 
+                inset 0 2px 5px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(255, 46, 46, 0.3);
+        }
+        
+        .participants-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            transition: all 0.3s ease;
+            border: 2px solid var(--black);
+        }
+        
+        .participants-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 1);
+        }
+        
+        .participants-slider::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            transition: all 0.3s ease;
+            border: 2px solid var(--black);
+        }
+        
+        .participants-slider::-moz-range-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 1);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        .maps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .map-item {
+            background: rgba(26, 26, 37, 0.8);
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .map-item:hover::before {
+            left: 100%;
+        }
+        
+        .map-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+            box-shadow: 0 5px 15px rgba(255, 46, 46, 0.3);
+        }
+        
+        .map-item.active {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+            border-color: var(--primary-red);
+            box-shadow: 0 5px 15px rgba(255, 46, 46, 0.4);
+        }
+        
+        .map-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .results-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .participant-card {
+            background: linear-gradient(145deg, rgba(35, 35, 50, 0.8) 0%, rgba(20, 20, 30, 0.8) 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .participant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 46, 46, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(40px, -40px);
+        }
+        
+        .participant-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255, 146, 43, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-30px, 30px);
+        }
+        
+        .participant-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 46, 46, 0.3);
+        }
+        
+        .participant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .participant-name {
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .participant-name i {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .participant-class {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 46, 46, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .participant-class::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .participant-class:hover::before {
+            left: 100%;
+        }
+        
+        .result-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(10, 10, 15, 0.5);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .result-item:hover {
+            background: rgba(15, 15, 20, 0.6);
+            transform: translateX(5px);
+            border-left-color: var(--primary-red);
+        }
+        
+        .result-label {
+            color: var(--light-red);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .result-label i {
+            font-size: 1.1rem;
+            width: 20px;
+            color: var(--gold);
+        }
+        
+        .result-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--white);
+            padding-left: 30px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .weapons-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            padding-left: 30px;
+        }
+        
+        .weapon-tag {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #e67e22 100%);
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 10px rgba(255, 146, 43, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .weapon-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .weapon-tag:hover::before {
+            left: 100%;
+        }
+        
+        .weapon-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 146, 43, 0.5);
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .button {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 46, 46, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 46, 46, 0.6);
+        }
+        
+        .button:hover::before {
+            left: 100%;
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .button-secondary {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #e67e22 100%);
+            box-shadow: 0 5px 15px rgba(255, 146, 43, 0.4);
+        }
+        
+        .button-secondary:hover {
+            box-shadow: 0 10px 25px rgba(255, 146, 43, 0.6);
+        }
+        
+        .button-tertiary {
+            background: linear-gradient(135deg, var(--gold) 0%, #e6b400 100%);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .button-tertiary:hover {
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+        }
+        
+        footer {
+            margin-top: auto;
+            text-align: center;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            padding: 25px;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: var(--light-gray);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-red);
+            transform: translateY(-5px);
+            text-shadow: var(--neon-glow);
+        }
+        
+        .copyright {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+        
+        .copyright i {
+            color: var(--gold);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .results-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .participants-control {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .participants-input {
+                width: 100%;
+            }
+            
+            .maps-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .participant-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Задержки для анимации карточек */
+        .participant-card:nth-child(1) { animation-delay: 0.1s; }
+        .participant-card:nth-child(2) { animation-delay: 0.2s; }
+        .participant-card:nth-child(3) { animation-delay: 0.3s; }
+        .participant-card:nth-child(4) { animation-delay: 0.4s; }
+        .participant-card:nth-child(5) { animation-delay: 0.5s; }
+        .participant-card:nth-child(6) { animation-delay: 0.6s; }
+        .participant-card:nth-child(7) { animation-delay: 0.7s; }
+        .participant-card:nth-child(8) { animation-delay: 0.8s; }
+        .participant-card:nth-child(9) { animation-delay: 0.9s; }
+        .participant-card:nth-child(10) { animation-delay: 1.0s; }
+        
+        /* Анимация генерации */
+        @keyframes generatePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .generating {
+            animation: generatePulse 0.5s ease;
+        }
+        
+        /* Стили для классов */
+        .class-heavy { border-left-color: var(--primary-red) !important; }
+        .class-medium { border-left-color: var(--accent-orange) !important; }
+        .class-light { border-left-color: var(--gold) !important; }
+        
+        /* Стили для карты */
+        .map-result {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(145deg, rgba(35, 35, 50, 0.8) 0%, rgba(20, 20, 30, 0.8) 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .map-result::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 46, 46, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(40px, -40px);
+        }
+        
+        .map-result:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .map-result-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .map-result-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--white);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <header>
+        <div class="logo-container">
+            <div class="logo-glow"></div>
+            <div class="logo">
+                <i class="fas fa-dice-d20"></i>
+            </div>
+        </div>
+        <h1>The Finals Loadout</h1>
+        <p class="subtitle">Создавайте случайные наборы снаряжения для соревновательных матчей. Выберите количество участников и карты, затем нажмите "Сгенерировать" для получения уникальных комбинаций.</p>
+    </header>
+    
+    <main class="container">
+        <div class="participants-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div>
+                    <div class="section-title">Настройки участников</div>
+                    <div class="section-subtitle">Выберите количество игроков для генерации наборов</div>
+                </div>
+            </div>
+            
+            <div class="participants-control">
+                <div class="participants-input-container">
+                    <input type="number" id="participants-input" class="participants-input" min="1" max="10" value="3">
+                </div>
+                <div class="participants-slider-container">
+                    <input type="range" id="participants-slider" class="participants-slider" min="1" max="10" value="3">
+                    <div class="slider-labels">
+                        <span>1</span>
+                        <span>10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="maps-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-map"></i>
+                </div>
+                <div>
+                    <div class="section-title">Выбор карт</div>
+                    <div class="section-subtitle">Выберите карты для игры (можно выбрать несколько)</div>
+                </div>
+            </div>
+            
+            <div class="maps-grid" id="maps-grid">
+                <!-- Карты будут добавлены через JavaScript -->
+            </div>
+        </div>
+        
+        <div id="map-result" class="map-result" style="display: none;">
+            <div class="map-result-title">СЛУЧАЙНАЯ КАРТА</div>
+            <div class="map-result-name" id="random-map-name">-</div>
+        </div>
+        
+        <div id="results-container" class="results-container">
+            <!-- Карточки участников будут генерироваться здесь -->
+        </div>
+        
+        <div class="button-container">
+            <button id="generate-btn" class="button">
+                <i class="fas fa-random"></i> Сгенерировать наборы
+            </button>
+            <button id="generate-single-btn" class="button button-secondary">
+                <i class="fas fa-user-plus"></i> Добавить игрока
+            </button>
+            <button id="generate-map-btn" class="button button-tertiary">
+                <i class="fas fa-map"></i> Случайная карта
+            </button>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                <i class="far fa-copyright"></i>
+                <span>The Finals Loadout Generator 2025 by Timaa</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Данные для генерации
+        const classes = {
+            'Heavy': {
+                specializations: ['CHARGE\'N\'SLAM', 'MESH SHIELD', 'WINCH CLAW', 'GOO GUN'],
+                weapons: ['SA1216', 'MGL32', 'SLEDGEHAMMER', 'M60', 'M134 MINIGUN', 'SPEAR', '.50 AKIMBO', 'SHAK-50', 'FLAMETHROWER', 'LEWIS GUN', 'BFR TITAN', 'KS-23'],
+                gadgets: ['LOCKBOLT', 'RPG-7', 'PYRO GRENADE', 'DOME SHIELD', 'FRAG GRENADE', 'GOO GRENADE', 'BARRICADE', 'EXPLOSIVE MINE', 'GAS GRENADE', 'ANTI-GRAVITY CUBE', 'HEALING EMITTER', 'C4', 'FLASHBANG', 'SMOKE GRENADE', 'PYRO MINE', 'PROXIMITY SENSOR']
+            },
+            'Medium': {
+                specializations: ['HEALING BEAM', 'GUARDIAN TURRET', 'DEMATERIALIZER'],
+                weapons: ['RIOT SHIELD', 'CL-40', 'CB-01 REPEATER', 'CERBERUS 12GA', 'AKM', 'R.357', 'PIKE-556', 'FAMAS', 'FCAR', 'MODEL 1887', 'P90', 'DUAL BLADES'],
+                gadgets: ['PYRO GRENADE', 'FRAG GRENADE', 'JUMP PAD', 'GOO GRENADE', 'EXPLOSIVE MINE', 'GAS GRENADE', 'GLITCH TRAP', 'APS TURRET', 'ZIPLINE', 'BREACH DRILL', 'FLASHBANG', 'SMOKE GRENADE', 'GAS MINE', 'DATA RESHAPER', 'PROXIMITY SENSOR', 'DEFIBRILLATOR']
+            },
+            'Light': {
+                specializations: ['EVASIVE DASH', 'GRAPPLING HOOK', 'CLOAKING DEVICE'],
+                weapons: ['93R', 'DAGGER', 'ARN-220', 'M11', 'SR-84', 'SWORD', 'LH1', 'RECURVE BOW', 'V9S', 'SH1900', 'XP-54', 'THROWING KNIVES'],
+                gadgets: ['H+ INFUSER', 'PYRO GRENADE', 'FRAG GRENADE', 'THERMAL BORE', 'GOO GRENADE', 'GAS GRENADE', 'GLITCH GRENADE', 'NULLIFIER', 'GRAVITY VORTEX', 'FLASHBANG', 'SMOKE GRENADE', 'SONER GRENADE', 'GATEWAY', 'TRACKING DART', 'BREACH CHARGE', 'THERMAL VISION']
+            }
+        };
+
+        // Список карт
+        const maps = [
+            'NOZOMI/CITADEL',
+            'SEOUL',
+            'MONACO', 
+            'LAS VEGAS',
+            'SYS$HORIZON',
+            'SKYWAY STADIUM',
+            'BERNAL',
+            'FORTUNE STADIUM',
+            'LAS VEGAS STADIUM',
+            'KYOTO'
+        ];
+
+        // Элементы DOM
+        const participantsInput = document.getElementById('participants-input');
+        const participantsSlider = document.getElementById('participants-slider');
+        const mapsGrid = document.getElementById('maps-grid');
+        const mapResult = document.getElementById('map-result');
+        const randomMapName = document.getElementById('random-map-name');
+        const resultsContainer = document.getElementById('results-container');
+        const generateBtn = document.getElementById('generate-btn');
+        const generateSingleBtn = document.getElementById('generate-single-btn');
+        const generateMapBtn = document.getElementById('generate-map-btn');
+
+        // Выбранные карты
+        let selectedMaps = [...maps];
+
+        // Инициализация карт
+        function initializeMaps() {
+            mapsGrid.innerHTML = '';
+            maps.forEach(map => {
+                const mapItem = document.createElement('div');
+                mapItem.classList.add('map-item');
+                if (selectedMaps.includes(map)) {
+                    mapItem.classList.add('active');
+                }
+                mapItem.innerHTML = `
+                    <div class="map-name">${map}</div>
+                `;
+                mapItem.addEventListener('click', () => {
+                    mapItem.classList.toggle('active');
+                    if (selectedMaps.includes(map)) {
+                        selectedMaps = selectedMaps.filter(m => m !== map);
+                    } else {
+                        selectedMaps.push(map);
+                    }
+                });
+                mapsGrid.appendChild(mapItem);
+            });
+        }
+
+        // Функция для получения случайного элемента из массива
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        // Функция для получения нескольких уникальных случайных элементов из массива
+        function getRandomItems(array, count) {
+            const shuffled = [...array].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // Функция для генерации случайной карты
+        function generateRandomMap() {
+            if (selectedMaps.length === 0) {
+                alert('Пожалуйста, выберите хотя бы одну карту!');
+                return;
+            }
+            
+            const randomMap = getRandomItem(selectedMaps);
+            randomMapName.textContent = randomMap;
+            mapResult.style.display = 'block';
+            
+            // Анимация кнопки
+            generateMapBtn.classList.add('generating');
+            setTimeout(() => {
+                generateMapBtn.classList.remove('generating');
+            }, 500);
+        }
+
+        // Функция для генерации одного набора снаряжения
+        function generateLoadout(participantNumber) {
+            // Выбираем случайный класс
+            const classNames = Object.keys(classes);
+            const selectedClass = getRandomItem(classNames);
+            const classData = classes[selectedClass];
+            
+            // Выбираем специализацию, оружие и гаджеты для выбранного класса
+            const selectedSpecialization = getRandomItem(classData.specializations);
+            const selectedWeapon = getRandomItem(classData.weapons);
+            const selectedGadgets = getRandomItems(classData.gadgets, 3);
+            
+            return {
+                participantNumber,
+                class: selectedClass,
+                specialization: selectedSpecialization,
+                weapon: selectedWeapon,
+                gadgets: selectedGadgets
+            };
+        }
+
+        // Функция для генерации всех наборов снаряжения
+        function generateAllLoadouts() {
+            const participantsCount = parseInt(participantsInput.value);
+            resultsContainer.innerHTML = '';
+            
+            for (let i = 1; i <= participantsCount; i++) {
+                const loadout = generateLoadout(i);
+                createParticipantCard(loadout);
+            }
+            
+            // Анимация кнопки
+            generateBtn.classList.add('generating');
+            setTimeout(() => {
+                generateBtn.classList.remove('generating');
+            }, 500);
+        }
+
+        // Функция для добавления одного участника
+        function addSingleParticipant() {
+            const currentCount = document.querySelectorAll('.participant-card').length;
+            if (currentCount >= 10) {
+                alert('Максимальное количество участников - 10');
+                return;
+            }
+            
+            const loadout = generateLoadout(currentCount + 1);
+            createParticipantCard(loadout);
+            
+            // Обновляем счетчик
+            participantsInput.value = currentCount + 1;
+            participantsSlider.value = currentCount + 1;
+            
+            // Анимация кнопки
+            generateSingleBtn.classList.add('generating');
+            setTimeout(() => {
+                generateSingleBtn.classList.remove('generating');
+            }, 500);
+        }
+
+        // Функция для создания карточки участника
+        function createParticipantCard(loadout) {
+            const participantCard = document.createElement('div');
+            participantCard.classList.add('participant-card');
+            
+            // Добавляем класс для стилизации границы
+            if (loadout.class === 'Heavy') {
+                participantCard.classList.add('class-heavy');
+            } else if (loadout.class === 'Medium') {
+                participantCard.classList.add('class-medium');
+            } else {
+                participantCard.classList.add('class-light');
+            }
+            
+            participantCard.innerHTML = `
+                <div class="participant-header">
+                    <div class="participant-name">
+                        <i class="fas fa-user"></i>
+                        Участник ${loadout.participantNumber}
+                    </div>
+                    <div class="participant-class">${loadout.class}</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">
+                        <i class="fas fa-star"></i>
+                        Специализация
+                    </div>
+                    <div class="result-value">${loadout.specialization}</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">
+                        <i class="fas fa-gun"></i>
+                        Оружие
+                    </div>
+                    <div class="result-value">${loadout.weapon}</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">
+                        <i class="fas fa-toolbox"></i>
+                        Гаджеты
+                    </div>
+                    <div class="weapons-list">
+                        ${loadout.gadgets.map(gadget => `<div class="weapon-tag">${gadget}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            resultsContainer.appendChild(participantCard);
+        }
+
+        // Синхронизация ползунка и поля ввода
+        participantsInput.addEventListener('input', function() {
+            let value = parseInt(this.value);
+            if (value < 1) value = 1;
+            if (value > 10) value = 10;
+            this.value = value;
+            participantsSlider.value = value;
+        });
+
+        participantsSlider.addEventListener('input', function() {
+            participantsInput.value = this.value;
+        });
+
+        // Обработчики событий для кнопок
+        generateBtn.addEventListener('click', generateAllLoadouts);
+        generateSingleBtn.addEventListener('click', addSingleParticipant);
+        generateMapBtn.addEventListener('click', generateRandomMap);
+
+        // Инициализация при загрузке страницы
+        window.addEventListener('load', () => {
+            initializeMaps();
+            generateAllLoadouts();
+        });
+    </script>
+</body>
+</html>
