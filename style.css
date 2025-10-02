@@ -1,0 +1,15 @@
+.container {
+    max-width: 1300px;
+    width: 100%;
+    background: rgba(26, 26, 37, 0.9); /* Увеличил непрозрачность с 0.7 до 0.9 */
+    backdrop-filter: blur(5px); /* Уменьшил размытие с 15px до 5px */
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
